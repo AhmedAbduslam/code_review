@@ -1,3 +1,4 @@
+import './widgets/app_bar.dart';
 import 'package:flutter/material.dart';
 import 'main_app.dart';
 
@@ -13,7 +14,10 @@ class MyApp extends StatelessWidget {
         primaryColor: Colors.white,
         accentColor: Color(0XFF54D3C2),
       ),
-      home: MainApp(),
+      home: Scaffold(
+        appBar: MyAppBar().appBar,
+        body: MainApp(),
+      ),
     );
   }
 }

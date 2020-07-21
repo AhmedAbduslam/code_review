@@ -1,99 +1,100 @@
-import 'package:code_review/widgets/c_widget.dart';
-import 'package:code_review/widgets/card_tile.dart';
-import 'package:code_review/style.dart';
-import 'package:code_review/widgets/search_box.dart';
+import './widgets/c_widget.dart';
+import './widgets/card_tile.dart';
+import './style.dart';
+import './widgets/search_box.dart';
 import 'package:flutter/material.dart';
+import 'widgets/app_bar.dart';
 
-class MainApp extends StatefulWidget {
-  @override
-  _MainAppState createState() => _MainAppState();
-}
+class MainApp extends StatelessWidget {
+  double screeanHeight(context) {
+    return MediaQuery.of(context).size.height -
+        MyAppBar().appBar.preferredSize.height -
+        MediaQuery.of(context).padding.top;
+  }
 
-class _MainAppState extends State<MainApp> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: Text(
-          'Explore',
-          style: bigText,
-        ),
-        leading: Icon(Icons.arrow_back),
-        actions: <Widget>[
-          IconButton(icon: Icon(Icons.favorite_border), onPressed: () {}),
-          IconButton(icon: Icon(Icons.location_on), onPressed: () {})
-        ],
-      ),
-      body: Column(children: <Widget>[
-        Container(
-          color: Colors.grey[200],
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 18.0),
+    return SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: <Widget>[
+          Container(
+            height: screeanHeight(context) * 0.21, //21% of the screen
+            color: Colors.grey[200],
+            padding: EdgeInsets.symmetric(horizontal: 18.0),
             child: Column(
               children: <Widget>[
-                SearchBox(),
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 10.0),
-                  child: Row(
-                    children: <Widget>[
-                      Expanded(
-                          child: Cwidget(
-                              head: 'Chosse date', body: '12 Dec - 22 Dec')),
-                      Expanded(
-                        child: Container(
-                            padding: EdgeInsets.only(left: 16.0),
-                            decoration: BoxDecoration(
-                                border: Border(
-                                    left: BorderSide(
-                              width: 1.0,
-                              color: Colors.grey[400],
-                            ))),
+                Expanded(flex: 3, child: SearchBox()),
+                Expanded(
+                  flex: 2,
+                  child: Padding(
+                    padding: EdgeInsets.only(bottom: 10.0),
+                    child: Row(
+                      children: <Widget>[
+                        Expanded(
                             child: Cwidget(
-                                head: 'Number of rooms',
-                                body: '1 Room - 2 Adults')),
-                      )
-                    ],
+                                head: 'Chosse date', body: '12 Dec - 22 Dec')),
+                        Expanded(
+                          child: Container(
+                              padding: EdgeInsets.only(left: 16.0),
+                              decoration: BoxDecoration(
+                                  border: Border(
+                                      left: BorderSide(
+                                width: 1.0,
+                                color: Colors.grey[400],
+                              ))),
+                              child: Cwidget(
+                                  head: 'Number of rooms',
+                                  body: '1 Room - 2 Adults')),
+                        )
+                      ],
+                    ),
                   ),
                 )
               ],
             ),
           ),
-        ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 18.0),
-          child: Column(
-            children: <Widget>[
-              Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    Text('530 hotels found', style: TextStyle(fontSize: 12.0)),
-                    InkWell(
-                      onTap: () {},
-                      child: Padding(
-                          padding: EdgeInsets.symmetric(vertical: 10.0),
-                          child: Row(
-                            children: <Widget>[
-                              Text('Filters', style: medText),
-                              SizedBox(width: 5.0),
-                              Icon(Icons.sort,
-                                  color: Theme.of(context).accentColor)
-                            ],
-                          )),
-                    ),
-                  ]),
-              Container(
-                width: double.infinity,
-                height: 300.0,
-                child: ListView(
-                  itemExtent: 230,
-                  children: <Widget>[CardTile(), CardTile()],
-                ),
-              )
-            ],
+          Container(
+            width: double.infinity,
+            padding: EdgeInsets.symmetric(horizontal: 18.0),
+            color: Theme.of(context).primaryColor,
+            child: Column(
+              children: <Widget>[
+                Container(
+                    height: screeanHeight(context) *
+                        0.08, // 8% of the screen height
+                    child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          FittedBox(
+                              child: Text('530 hotels found',
+                                  style: TextStyle(fontSize: 12.0))),
+                          InkWell(
+                              onTap: () {},
+                              child: Padding(
+                                  padding: EdgeInsets.symmetric(vertical: 10.0),
+                                  child: Row(children: <Widget>[
+                                    Text('Filters', style: medText),
+                                    SizedBox(width: 6.0),
+                                    FittedBox(
+                                      child: Icon(Icons.sort,
+                                          color: Theme.of(context).accentColor),
+                                    )
+                                  ])))
+                        ])),
+                Container(
+                  height:
+                      screeanHeight(context) * 0.71, // 67% of the screen height
+                  child: ListView(
+                    itemExtent: 230,
+                    children: <Widget>[CardTile(), CardTile()],
+                  ),
+                )
+              ],
+            ),
           ),
-        ),
-      ]),
+        ],
+      ),
     );
   }
 }

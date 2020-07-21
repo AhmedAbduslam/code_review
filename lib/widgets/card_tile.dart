@@ -13,7 +13,7 @@ class _CardTileState extends State<CardTile> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 15.0),
+      padding: const EdgeInsets.only(bottom: 10.0),
       child: Card(
         shadowColor: Colors.white60,
         semanticContainer: true,
@@ -22,14 +22,13 @@ class _CardTileState extends State<CardTile> {
           borderRadius: BorderRadius.circular(18.0),
         ),
         elevation: 6,
-        margin: EdgeInsets.zero,
         child: Column(
           children: <Widget>[
             Expanded(
               flex: 2,
               child: Container(
+                  padding: const EdgeInsets.all(10.0),
                   alignment: Alignment.topRight,
-                  width: double.infinity,
                   decoration: BoxDecoration(
                     image: DecorationImage(
                       image: NetworkImage(
@@ -37,23 +36,20 @@ class _CardTileState extends State<CardTile> {
                       fit: BoxFit.cover,
                     ),
                   ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: RawMaterialButton(
-                      constraints: BoxConstraints(minWidth: 35.0, minHeight: 35.0),
-                      elevation: 0.0,
-                      onPressed: () {
-                        setState(() {
-                          isFavorite ? isFavorite = false : isFavorite = true;
-                        });
-                      },
-                      fillColor: Colors.white,
-                      child: Icon(
-                          isFavorite ? Icons.favorite : Icons.favorite_border,
-                          color: Theme.of(context).accentColor,
-                          size: 20.0),
-                      shape: CircleBorder(),
-                    ),
+                  child: RawMaterialButton(
+                    constraints: BoxConstraints(minWidth: 35.0, minHeight: 35.0),
+                    elevation: 0.0,
+                    onPressed: () {
+                      setState(() {
+                        isFavorite ? isFavorite = false : isFavorite = true;
+                      });
+                    },
+                    fillColor: Colors.white,
+                    child: Icon(
+                        isFavorite ? Icons.favorite : Icons.favorite_border,
+                        color: Theme.of(context).accentColor,
+                        size: 20.0),
+                    shape: CircleBorder(),
                   )),
             ),
             Expanded(
@@ -66,6 +62,7 @@ class _CardTileState extends State<CardTile> {
   }
 }
 
+// ignore: camel_case_types
 class _description extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -78,8 +75,8 @@ class _description extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              Text('Grand Royal Hotel', style: bigText),
-              Text('\$180', style: bigText),
+              FittedBox(child: Text('Grand Royal Hotel', style: bigText)),
+              FittedBox(child: Text('\$180', style: bigText)),
             ],
           ),
           Row(

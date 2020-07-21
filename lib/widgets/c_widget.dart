@@ -1,4 +1,4 @@
-import 'package:code_review/style.dart';
+import '../style.dart';
 import 'package:flutter/material.dart';
 
 class Cwidget extends StatelessWidget {
@@ -11,14 +11,8 @@ class Cwidget extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        Text(head, style: smallText),
-        SizedBox(
-          height: 5.0,
-        ),
-        Text(
-          body,
-          style: medText,
-        )
+        FittedBox(child: Text(head, style: smallText)),
+        FittedBox(child: Text(body, style: medText))
       ],
     );
   }
